@@ -26,6 +26,6 @@ kubectl get pods -n traefik -w
 
 Exposer le dashboard sur : http://127.0.0.1:9000/dashboard/
 ```
-kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=traefik" --output=name) 9000:9000
+kubectl -n traefik port-forward $(kubectl -n traefik get pods --selector "app.kubernetes.io/name=traefik" --output=name) 9000:9000 &
 ```
 
