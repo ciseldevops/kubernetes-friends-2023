@@ -1,99 +1,60 @@
-Comment déployer Traefik et Traefik Pilot sur un cluster SKS
-Déploiement de Traefik
+#Déploiement de Traefik et Traefik Pilot sur un cluster SKS
+##Prérequis
 
-Voici les étapes à suivre pour déployer Traefik sur votre cluster SKS :
+Avant de commencer, vous devez avoir un cluster SKS fonctionnel et une connexion au cluster via la CLI Exoscale.
+Étapes
 
-    Créez un fichier YAML pour les ressources Traefik :
+    Créez un namespace pour Traefik :
 
-yaml
+arduino
 
-# traefik.yaml
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: traefik-web-ui
-  namespace: kube-system
-spec:
-  entryPoints:
-    - web
-  routes:
-    - match: Host(`traefik.example.com`) && PathPrefix(`/api`)
-      kind: Rule
-      services:
-        - name: api@internal
-          kind: TraefikService
-  - match: Host(`traefik.example.com`) && PathPrefix(`/dashboard`)
-    kind: Rule
-    services:
-      - name: api@internal
-        kind: TraefikService
-        passHostHeader: true
-  - match: Host(`traefik.example.com`)
-    kind: Rule
-    services:
-      - name: traefik-web-ui
-        kind: Service
-        namespace: kube-system
-        port: 8080
+kubectl create namespace traefik
 
-    Créez le secret pour Traefik :
+    Ajoutez le repo helm de Traefik :
 
-shell
+csharp
 
-$ kubectl create secret generic traefik-cert --from-file=tls.crt=traefik.crt --from-file=tls.key=traefik.key -n kube-system
+helm repo add traefik https://helm.traefik.io/traefik
+helm repo update
 
-    Créez le déploiement et le service Traefik :
+    Installez Traefik :
 
-shell
+arduino
 
-$ kubectl apply -f https://raw.githubusercontent.com/traefik/traefik/v2.5/examples/k8s/traefik-deployment.yaml
+helm install traefik traefik/traefik --namespace traefik --set service.type=LoadBalancer --set pilot.enabled=true --set pilot.token="votre-token" --set pilot.dashboard.enabled=true
 
-    Créez le service NodePort pour le WebUI de Traefik :
+    Vérifiez que Traefik est correctement déployé :
 
-shell
+sql
 
-$ kubectl apply -f https://raw.githubusercontent.com/traefik/traefik/v2.5/examples/k8s/ui.yaml
+kubectl get all -n traefik
 
-    Créez la ressource IngressRoute pour le WebUI de Traefik :
+Vous devriez voir une sortie similaire à celle-ci :
 
-shell
+bash
 
-$ kubectl apply -f traefik.yaml
+NAME                           READY   STATUS    RESTARTS   AGE
+pod/traefik-79fbcdbdfd-ck4s4   1/1     Running   0          58s
 
-Déploiement de Traefik Pilot
+NAME              TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)                                     AGE
+service/traefik   LoadBalancer   10.104.221.10   185.203.119.2   80:32674/TCP,443:31181/TCP,8080:31452/TCP   58s
 
-Voici les étapes à suivre pour déployer Traefik Pilot sur votre cluster SKS :
+NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/traefik   1/1     1             1            58s
 
-    Créez le secret pour Traefik Pilot :
+NAME                                 DESIRED   CURRENT   READY   AGE
+replicaset.apps/traefik-79fbcdbdfd   1         1         1       58s
 
-shell
+    (Optionnel) Si vous avez activé Traefik Pilot, vous pouvez accéder à son interface via l'adresse IP externe du service Traefik et le port 8080. Pour obtenir le mot de passe, vous devez récupérer le jeton créé lors de l'installation :
 
-$ kubectl create secret generic traefik-pilot-cert --from-file=tls.crt=pilot.crt --from-file=tls.key=pilot.key -n kube-system
+arduino
 
-    Créez le fichier de configuration YAML pour le déploiement de Traefik Pilot :
+kubectl get secret traefik-pilot -n traefik -o jsonpath='{.data.token}' | base64 -d
 
-yaml
+    (Optionnel) Vous pouvez également déployer Traefik Pilot en tant que chart Helm séparé :
 
-# traefik-pilot.yaml
-apiVersion: traefik.io/v1alpha1
-kind: Pilot
-metadata:
-  name: traefik-pilot
-  namespace: kube-system
-spec:
-  token: "YOUR_PILOT_TOKEN"
-  static:
-    ingress:
-      enabled: true
-      kubeConfig: "/etc/traefik/pilot-kubeconfig.yaml"
-      routeConfigFile: "/etc/traefik/route-config.yaml"
-  dynamic:
-    kubernetes:
-      labelSelector: "app.kubernetes.io/name=traefik-pilot,app.kubernetes.io/instance=traefik-pilot"
-      namespaces:
-        - kube-system
-      watch: true
+arduino
 
-Assurez-vous de remplacer YOUR_PILOT_TOKEN par votre propre token.
+helm install traefik-pilot traefik/traefik-pilot --namespace traefik --set pilot.token="votre-token" --set pilot.dashboard.enabled=true
 
-    Créez le fichier de configuration YAML pour le Service
+Et voilà ! Vous devriez maintenant avoir Traefik et Traefik Pilot déployés sur votre cluster SKS.
