@@ -81,6 +81,6 @@ spec:
               service:
                 name: nginx-service
                 port:
-                  name: http
+                  number: 80
 EOF
 ```
