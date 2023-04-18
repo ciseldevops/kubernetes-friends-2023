@@ -1,5 +1,5 @@
-#Déploiement de Traefik et Traefik Pilot sur un cluster SKS
-##Prérequis
+# Déploiement de Traefik et Traefik Pilot sur un cluster SKS
+## Prérequis
 
 Avant de commencer, vous devez avoir un cluster SKS fonctionnel et une connexion au cluster via la CLI Exoscale.
 Étapes
