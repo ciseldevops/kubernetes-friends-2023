@@ -31,7 +31,7 @@ kubectl -n traefik port-forward $(kubectl -n traefik get pods --selector "app.ku
 
 Créer un déploiement NGINX avec ingress Traefik
 ```
-cat <<EOF | kubectl create -f -
+cat <<EOF | kubectl apply -f -
 apiVersion: apps/v1
 kind: Deployment
 metadata:
