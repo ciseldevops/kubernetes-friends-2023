@@ -15,8 +15,7 @@ kubectl create namespace traefik
 Installer Traefik avec Helm :
 ```
 helm install traefik traefik/traefik \
-  --namespace traefik \
-  --values https://raw.githubusercontent.com/traefik/traefik/v2.5/examples/k8s/traefik-values.yaml
+  --namespace traefik
 ```
 
 Vérifier que le déploiement de Traefik est terminé :
@@ -25,19 +24,8 @@ Vérifier que le déploiement de Traefik est terminé :
 kubectl get pods -n traefik
 ```
 
-Installer Traefik Pilot avec Helm :
+Exposer le dashboard sur : http://127.0.0.1:9000/dashboard/
 ```
-helm install traefik-pilot traefik/traefik-pilot \
-  --namespace traefik \
-  --set pilot.token=<YOUR_PILOT_TOKEN>
+kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=traefik" --output=name) 9000:9000
 ```
-Vérifier que le déploiement de Traefik Pilot est terminé :
-```
-    kubectl get pods -n traefik
-```
-Notez que pour déployer Traefik Pilot, vous devez générer un jeton d'authentification et le passer à la commande helm install. Vous pouvez générer un jeton en utilisant la commande suivante :
-```
-openssl rand -hex 16
-```
-Assurez-vous également de remplacer <YOUR_PILOT_TOKEN> dans la commande d'installation de Traefik Pilot par le jeton que vous avez généré.
 
