@@ -21,7 +21,7 @@ helm install traefik traefik/traefik \
 Vérifier que le déploiement de Traefik est terminé :
 
 ```
-kubectl get pods -n traefik
+kubectl get pods -n traefik -w
 ```
 
 Exposer le dashboard sur : http://127.0.0.1:9000/dashboard/
