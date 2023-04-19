@@ -57,5 +57,66 @@ type: kubernetes.io/tls
 EOF
 ```
 
+Voici un exemple de fichier YAML pour déployer une application de démonstration accessible via un Ingress Nginx :
+cat <<EOF | kubectl apply -f -
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-app
+spec:
+  selector:
+    matchLabels:
+      app: demo-app
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: demo-app
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-service
+spec:
+  selector:
+    app: demo-app
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: demo-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: demo.example.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: demo-service
+                port:
+                  name: http
+EOF
+Ce fichier YAML déploie une application de démonstration Nginx avec un service pour exposer le port 80. L'Ingress est configuré avec l'annotation nginx.ingress.kubernetes.io/rewrite-target: / pour permettre la redirection des requêtes HTTP.
+
+Pour utiliser cet exemple, vous devez remplacer demo.example.com par votre propre nom de domaine et appliquer cette commande kubectl à votre cluster Kubernetes
+
+
+
 
  
