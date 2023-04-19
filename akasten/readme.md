@@ -21,3 +21,8 @@ Generate temp Token for admin access
 ```
 kubectl -n kasten-io create token k10-k10 --duration=24h
 ```
+
+Access web interface at http://127.0.0.1:8080/k10/#/
+```
+kubectl --namespace kasten-io port-forward service/gateway 8080:8000
+```
