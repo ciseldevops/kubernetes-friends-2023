@@ -1,4 +1,5 @@
-Install ingress-nginx using Helm chart in the namespace ingress-nginx
+Install ingress-nginx using Helm chart in the namespace ingress-nginx 
+https://learn.microsoft.com/en-us/azure/aks/ingress-basic?tabs=azure-cli#create-an-ingress-controller
 ```
 helm install ingress-nginx ingress-nginx/ingress-nginx \
     --version 4.1.3 \
