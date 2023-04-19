@@ -14,5 +14,10 @@ Install Kasten using Helm
 ```
 helm repo add kasten https://charts.kasten.io --force-update && helm repo update
 kubectl create ns kasten-io
-helm install k10 kasten/k10 --namespace=kasten-io
+helm install k10 kasten/k10 --namespace=kasten-io --set auth.tokenAuth.enabled=true
+```
+
+Generate temp Token for admin access
+```
+kubectl -n kasten-io create token k10-k10 --duration=24h
 ```
