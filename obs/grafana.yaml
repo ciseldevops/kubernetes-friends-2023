@@ -73,7 +73,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
 spec:
   rules:
-  - host: grafana.example.com
+  - host: grafanademo.example.com
     http:
       paths:
       - path: /
