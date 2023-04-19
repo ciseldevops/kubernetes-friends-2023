@@ -1,4 +1,4 @@
-Install ingress-nginx using Helm chart
+Install ingress-nginx using Helm chart in the namespace ingress-nginx
 ```
 helm install ingress-nginx ingress-nginx/ingress-nginx \
     --version 4.1.3 \
