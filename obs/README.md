@@ -10,3 +10,8 @@ Namespace : obs
 grafana.ingress.enabled : True
 grafana.adminPassword : demo
 ```
+
+Configure the ingress to use the nginx class
+```
+kubectl -n obs patch ingress obs-grafana -p '{"spec":{"ingressClassName":"nginx"}}'
+```
