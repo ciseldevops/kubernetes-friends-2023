@@ -1,17 +1,14 @@
+Grafana app in ArgoCD
 
-https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack
-```
-Create new application
-Name : obs
-Create Namespace : True
-Repository : https://prometheus-community.github.io/helm-charts
-Chart : kube-prometheus-stack
-Namespace : obs
-grafana.ingress.enabled : True
-grafana.adminPassword : demo
-```
 
-Configure the ingress to use the nginx class
-```
-kubectl -n monitoring patch ingress grafana-ingress -p '{"spec":{"ingressClassName":"nginx"}}'
-```
+Grafana Values in ArgoCD
+ingress:
+  enabled: true
+  hosts:
+    - grafanademo.example.com
+persistence:
+  type: pvc
+  enabled: true
+
+kubectl get secret --namespace moinitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+kubectl get secret --namespace moinitoring grafana -o jsonpath="{.data.admin-user}" | base64 --decode ; echo
