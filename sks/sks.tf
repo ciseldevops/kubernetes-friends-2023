@@ -1,6 +1,6 @@
 module "sks" {
   source  = "camptocamp/sks/exoscale"
-  version = "0.3.1"
+  version = "0.4.1"
 
   name = "lfs2023"
   zone = "ch-gva-2"
