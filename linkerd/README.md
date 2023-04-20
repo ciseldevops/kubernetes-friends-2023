@@ -68,3 +68,10 @@ spec:
               number: 8084
 EOF              
 ```
+
+
+Uninstall
+```
+linkerd viz uninstall | kubectl delete -f -
+linkerd uninstall | kubectl delete -f -
+```
