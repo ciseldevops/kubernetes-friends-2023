@@ -17,3 +17,9 @@ SKS Connexion
 ```
 terraform output -json kubeconfig | jq -r . > ~/.kube/config
 ```
+
+Deploy CSI Longhorn
+```
+helm repo add longhorn https://charts.longhorn.io
+helm repo update
+```
