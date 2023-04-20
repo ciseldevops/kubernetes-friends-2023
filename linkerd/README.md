@@ -19,13 +19,11 @@ linkerd check
 Metrics and Dashboard
 
 ```
-linkerd viz install | kubectl apply -f - # install the on-cluster metrics stack
+kubectl apply -f linkerd/viz-install.yaml
 linkerd check
-linkerd viz dashboard &
 
 ```
-Source : https://linkerd.io/2.13/getting-started/
-
+Create ingress
 ```
 cat <<EOF | kubectl create -f -
 ---
@@ -75,3 +73,6 @@ Uninstall
 linkerd viz uninstall | kubectl delete -f -
 linkerd uninstall | kubectl delete -f -
 ```
+
+Source : https://linkerd.io/2.13/getting-started/
+
