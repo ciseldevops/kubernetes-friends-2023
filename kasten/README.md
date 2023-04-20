@@ -1,9 +1,11 @@
+Exoscale create snapshot class
+```
+kubectl -n kube-system apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-4.0/client/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml
+kubectl -n kube-system apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-4.0/client/config/crd/snapshot.storage.k8s.io_volumesnapshotcontents.yaml
+kubectl -n kube-system apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-4.0/client/config/crd/snapshot.storage.k8s.io_volumesnapshots.yaml
 
-Azure - Create a volume snapshot class
 ```
-kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/azuredisk-csi-driver/master/deploy/example/snapshot/storageclass-azuredisk-snapshot.yaml
-kubectl annotate VolumeSnapshotClass csi-azuredisk-vsc k10.kasten.io/is-snapshot-class="true"
-```
+
 
 Validate CSI setup
 ```
@@ -25,4 +27,14 @@ kubectl -n kasten-io create token k10-k10 --duration=24h
 Access web interface at http://127.0.0.1:8080/k10/#/
 ```
 kubectl --namespace kasten-io port-forward service/gateway 8080:8000
+```
+
+
+
+
+
+Azure - Create a volume snapshot class
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/azuredisk-csi-driver/master/deploy/example/snapshot/storageclass-azuredisk-snapshot.yaml
+kubectl annotate VolumeSnapshotClass csi-azuredisk-vsc k10.kasten.io/is-snapshot-class="true"
 ```
