@@ -8,7 +8,7 @@ module "sks" {
 
   nodepools = {
     "compute" = {
-      instance_type = "standard.small"
+      instance_type = "standard.medium"
       size          = 3
     },
   }
