@@ -4,6 +4,7 @@ module "sks" {
 
   name = "lfs2023"
   zone = "ch-gva-2"
+  kubernetes_version = "1.24.12"
 
   nodepools = {
     "compute" = {
