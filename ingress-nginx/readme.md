@@ -1,20 +1,10 @@
-Install ingress-nginx using Helm chart in the namespace ingress-nginx 
-https://learn.microsoft.com/en-us/azure/aks/ingress-basic?tabs=azure-cli#create-an-ingress-controller
+Exoscale SKS : Install ingress-nginx in the namespace ingress-nginx  
 ```
-helm install ingress-nginx ingress-nginx/ingress-nginx \
-    --version 4.1.3 \
-    --namespace ingress-nginx \
-    --create-namespace \
-    --set controller.replicaCount=1 \
-    --set controller.nodeSelector."kubernetes\.io/os"=linux \
-    --set controller.image.digest="" \
-    --set controller.admissionWebhooks.patch.nodeSelector."kubernetes\.io/os"=linux \
-    --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-load-balancer-health-probe-request-path"=/healthz \
-    --set controller.admissionWebhooks.patch.image.digest="" \
-    --set defaultBackend.nodeSelector."kubernetes\.io/os"=linux \
-    --set defaultBackend.image.digest=""
- ```
- 	
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/exoscale/deploy.yaml
+kubectl -n ingress-nginx get svc -w
+```
+
+
 An example Ingress that makes use of the controller:
 ```
 cat <<EOF | kubectl apply -f -
@@ -119,7 +109,24 @@ Cette configuration YAML déploie une application de démonstration Nginx avec u
 
 Pour utiliser cet exemple, vous devez remplacer demo.example.com par votre propre nom de domaine et appliquer cette commande kubectl à votre cluster Kubernetes
 
+Divers
 
+Azure AKS : Install ingress-nginx using Helm chart in the namespace ingress-nginx 
+https://learn.microsoft.com/en-us/azure/aks/ingress-basic?tabs=azure-cli#create-an-ingress-controller
+```
+helm install ingress-nginx ingress-nginx/ingress-nginx \
+    --version 4.1.3 \
+    --namespace ingress-nginx \
+    --create-namespace \
+    --set controller.replicaCount=1 \
+    --set controller.nodeSelector."kubernetes\.io/os"=linux \
+    --set controller.image.digest="" \
+    --set controller.admissionWebhooks.patch.nodeSelector."kubernetes\.io/os"=linux \
+    --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-load-balancer-health-probe-request-path"=/healthz \
+    --set controller.admissionWebhooks.patch.image.digest="" \
+    --set defaultBackend.nodeSelector."kubernetes\.io/os"=linux \
+    --set defaultBackend.image.digest=""
+ ```
 
 
  
