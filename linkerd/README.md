@@ -67,6 +67,11 @@ spec:
 EOF
 ```
 
+Mesh demo-app
+```
+kubectl get -n demo-app deployment demo-app -o yaml | linkerd inject - | kubectl apply -f -
+```
+
 
 Uninstall
 ```
