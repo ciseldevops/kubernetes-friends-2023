@@ -67,5 +67,4 @@ spec:
             port:
               number: 8084
 EOF              
-
 ```
