@@ -2,7 +2,7 @@
 Fribourg Linux Seminar - Kubernetes Friends
 
 
-# Fil conducteur
+# Summary
 - Terraform : The IaC Friend
 - Longhorn  : The Storage Friend 
 - ingress-nginx : The Ingress Friend
@@ -12,7 +12,6 @@ Fribourg Linux Seminar - Kubernetes Friends
 - Linkerd : The Service Mesh Friend
 
 
-## Terraform et plus généralement l'IaC (Maitriser le Déploiement de ressources Infra)
 ## Deploy SKS cluster on Kubernetes using terraform
 
 Access setup
@@ -29,7 +28,7 @@ terraform plan -out main.tfplan
 terraform apply main.tfplan -auto-approve
 ```
 
-SKS Connexion
+SKS Connection
 ```
 terraform output -json kubeconfig | jq -r . > ~/.kube/config
 ```
@@ -47,7 +46,7 @@ Exoscale SKS : Install ingress-nginx in the namespace ingress-nginx
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/exoscale/deploy.yaml
 kubectl -n ingress-nginx get svc -w
 ```
-Voici un exemple de fichier YAML pour déployer une application de démonstration accessible via un Ingress Nginx :
+Here is an example of a YAML file to deploy a demo application accessible via an Ingress Nginx :
 ```
 cat <<EOF | kubectl apply -f -
 ---
@@ -105,7 +104,7 @@ spec:
 EOF
 ```
 
-## ArgoCD comme centre névralgique (Maitriser le déploiement de ressources Applicatives)
+## ArgoCD as a nerve center (Controlling the deployment of application resources)
 		a. Création Demo-App et Sync
 		b. Modification version nginx 1.23 -> 1.24 : Vue dans les logs des pods
 Install ArgoCD with service in LoadBalancer mode
@@ -122,7 +121,7 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 ```
 
     
-## Kasten pour sauvegarder Applications et Cluster (Maitriser les données hébergées)
+## Kasten to back up Applications and Cluster
 		a. Snapshot demo-app
 		b. Suppression déploiement demo-app
 		c. Restaure snapshot
@@ -159,7 +158,7 @@ kubectl --namespace kasten-io port-forward service/gateway 8080:8000
 ```
 
     
-## Observabilté avec Prometheus et Grafana (Maitriser l'utilisation des ressources)
+## Observability with Prometheus and Grafana (Controlling the use of resources)
 		a. Déploiement Prometheus via yaml repo
 		b. Déploiement Grafana via Helm chart et custom values
 		c. Création de la data source et Import du Dashboard 315
@@ -197,7 +196,7 @@ kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-user
 ```
 
 		
-## Linkerd pour la sécurisation de la communication entre les composants (Maitriser les applications)
+## Linkerd for securing communication between components (Mastering applications)
 		a. Installation linkerd et linkerd viz dashboard
 		b. Déploiement application de démo
 		c. automatically enables mutually-authenticated Transport Layer Security (mTLS) for all TCP traffic between meshed pods
@@ -280,6 +279,6 @@ linkerd viz uninstall | kubectl delete -f -
 linkerd uninstall | kubectl delete -f -
 ```
 		
-## Outils de sécurité : liens vers https://devops.cisel.ch 
-## Outils de gestion  : liens vers https://devops.cisel.ch  
+## Some Security Tools : [liens vers https://devops.cisel.ch ](https://devops.cisel.ch/kubernetes-containers-and-code-security-tools)
+## Some Ops Tools  : [liens vers https://devops.cisel.ch  ](https://devops.cisel.ch/kubernetes-operational-tools-you-must-try)
 
