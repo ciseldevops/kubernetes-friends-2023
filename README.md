@@ -279,6 +279,6 @@ linkerd viz uninstall | kubectl delete -f -
 linkerd uninstall | kubectl delete -f -
 ```
 		
-## Some Security Tools : [liens vers https://devops.cisel.ch ](https://devops.cisel.ch/kubernetes-containers-and-code-security-tools)
-## Some Ops Tools  : [liens vers https://devops.cisel.ch  ](https://devops.cisel.ch/kubernetes-operational-tools-you-must-try)
+## Some Security Tools : [https://devops.cisel.ch ](https://devops.cisel.ch/kubernetes-containers-and-code-security-tools)
+## Some Ops Tools  : [https://devops.cisel.ch  ](https://devops.cisel.ch/kubernetes-operational-tools-you-must-try)
 
