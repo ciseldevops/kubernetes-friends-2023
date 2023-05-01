@@ -2,12 +2,11 @@
 Fribourg Linux Seminar - Kubernetes Friends
 
 
-
 # Fil conducteur
 
 
 ## Terraform et plus généralement l'IaC (Maitriser le Déploiement de ressources Infra)
-### Deploy SKS cluster on Kubernetes using terraform
+## Deploy SKS cluster on Kubernetes using terraform
 
 Access setup
 ```
@@ -28,11 +27,12 @@ SKS Connexion
 terraform output -json kubeconfig | jq -r . > ~/.kube/config
 ```
 
-Deploy CSI Longhorn
+## Deploy CSI Longhorn
 ```
-helm repo add longhorn https://charts.longhorn.io
-helm repo update
+kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/1.4.1/deploy/longhorn.yaml
+kubectl port-forward deployment/longhorn-ui 7000:8000 -n longhorn-system
 ```
+Access Longhorn dashboard at http://127.0.0.1:7000
 
 ## Ingress controler
 Exoscale SKS : Install ingress-nginx in the namespace ingress-nginx  
@@ -99,6 +99,8 @@ EOF
 ```
 
 ## ArgoCD comme centre névralgique (Maitriser le déploiement de ressources Applicatives)
+		a. Création Demo-App et Sync
+		b. Modification version nginx 1.23 -> 1.24 : Vue dans les logs des pods
 Install ArgoCD with service in LoadBalancer mode
 ```
 kubectl create namespace argocd
@@ -111,10 +113,12 @@ Retrive default admin password
 ```
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
-		a. Création Demo-App et Sync
-		b. Modification version nginx 1.23 -> 1.24 : Vue dans les logs des pods
+
     
 ## Kasten pour sauvegarder Applications et Cluster (Maitriser les données hébergées)
+		a. Snapshot demo-app
+		b. Suppression déploiement demo-app
+		c. Restaure snapshot
 Exoscale create snapshot class
 ```
 kubectl -n kube-system apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-4.0/client/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml
@@ -123,7 +127,6 @@ kubectl -n kube-system apply -f https://raw.githubusercontent.com/kubernetes-csi
 kubectl -n kube-system apply -f https://raw.githubusercontent.com/ciseldevops/kubernetes-friends-2023/main/kasten/snap-config.yaml
 
 ```
-
 
 Validate CSI setup
 ```
@@ -147,11 +150,12 @@ Access web interface at http://127.0.0.1:8080/k10/#/
 ```
 kubectl --namespace kasten-io port-forward service/gateway 8080:8000
 ```
-		a. Snapshot demo-app
-		b. Suppression déploiement demo-app
-		c. Restaure snapshot
+
     
 ## Observabilté avec Prometheus et Grafana (Maitriser l'utilisation des ressources)
+		a. Déploiement Prometheus via yaml repo
+		b. Déploiement Grafana via Helm chart et custom values
+		c. Création de la data source et Import du Dashboard 315
 Prometheus deployment
 ```
 kubectl create ns monitoring
@@ -184,15 +188,90 @@ kubectl -n monitoring patch ingress grafana -p '{"spec":{"ingressClassName":"ngi
 kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-user}" | base64 --decode ; echo
 ```
-		a. Déploiement Prometheus via yaml repo
-		b. Déploiement Grafana via Helm chart et custom values
-		c. Création de la data source et Import du Dashboard 315
+
 		
 ## Linkerd pour la sécurisation de la communication entre les composants (Maitriser les applications)
 		a. Installation linkerd et linkerd viz dashboard
 		b. Déploiement application de démo
 		c. automatically enables mutually-authenticated Transport Layer Security (mTLS) for all TCP traffic between meshed pods
 		d. Meshing demo service with annotations
+Validate cluster and install linkerd
+
+```
+linkerd install --crds | kubectl apply -f -
+linkerd install | kubectl apply -f -
+linkerd check
+
+```
+
+Metrics and Dashboard
+
+```
+kubectl apply -f linkerd/viz-install.yaml
+linkerd check
+
+```
+Create ingress
+```
+cat <<EOF | kubectl create -f -
+---
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  name: web-ingress-auth
+  namespace: linkerd-viz
+data:
+  auth: YWRtaW46JGFwcjEkbjdDdTZnSGwkRTQ3b2dmN0NPOE5SWWpFakJPa1dNLgoK
+---
+# apiVersion: networking.k8s.io/v1beta1 # for k8s < v1.19
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ingress
+  namespace: linkerd-viz
+  annotations:
+    nginx.ingress.kubernetes.io/upstream-vhost: $service_name.$namespace.svc.cluster.local:8084
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header Origin "";
+      proxy_hide_header l5d-remote-ip;
+      proxy_hide_header l5d-server-id;      
+    nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/auth-secret: web-ingress-auth
+    nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: dashboard.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web
+            port:
+              number: 8084
+EOF
+```
+
+Mesh demo-app
+```
+kubectl get -n demo-app deployment demo-app -o yaml | linkerd inject - | kubectl apply -f -
+```
+
+Emoji Demo App
+```
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
+kubectl get -n emojivoto deploy -o yaml | linkerd inject - | kubectl apply -f -
+kubectl -n emojivoto port-forward svc/web-svc 8080:80
+
+
+Uninstall
+```
+linkerd viz uninstall | kubectl delete -f -
+linkerd uninstall | kubectl delete -f -
+```
 		
 ## Outils de sécurité : liens vers https://devops.cisel.ch 
 ## Outils de gestion  : liens vers https://devops.cisel.ch  
