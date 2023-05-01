@@ -3,6 +3,13 @@ Fribourg Linux Seminar - Kubernetes Friends
 
 
 # Fil conducteur
+- Deploy SKS cluster on Kubernetes using terraform
+- Deploy CSI Longhorn
+- Ingress controler
+- ArgoCD comme centre névralgique
+- Kasten pour sauvegarder Applications et Cluster
+- Observabilté avec Prometheus et Grafana
+- Linkerd pour la sécurisation de la communication
 
 
 ## Terraform et plus généralement l'IaC (Maitriser le Déploiement de ressources Infra)
