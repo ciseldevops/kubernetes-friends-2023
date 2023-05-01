@@ -1,7 +1,8 @@
-Grafana app in ArgoCD
+Create Grafana app in ArgoCD
 
 
 Grafana Values in ArgoCD
+```
 ingress:
   enabled: true
   hosts:
@@ -9,6 +10,10 @@ ingress:
 persistence:
   type: pvc
   enabled: true
+```
 
-kubectl get secret --namespace moinitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
-kubectl get secret --namespace moinitoring grafana -o jsonpath="{.data.admin-user}" | base64 --decode ; echo
+Récupération mot de passe par féfaut
+```
+kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-user}" | base64 --decode ; echo
+```
