@@ -3,13 +3,13 @@ Fribourg Linux Seminar - Kubernetes Friends
 
 
 # Fil conducteur
-- Deploy SKS cluster on Kubernetes using terraform
-- Deploy CSI Longhorn
-- Ingress controler
-- ArgoCD comme centre névralgique
-- Kasten pour sauvegarder Applications et Cluster
-- Observabilté avec Prometheus et Grafana
-- Linkerd pour la sécurisation de la communication
+- Terraform : The IaC Friend
+- Longhorn  : The Storage Friend 
+- ingress-nginx : The Ingress Friend
+- ArgoCD : The Deployment Friend
+- Kasten : The Backup and DR Friend
+- Prometheus and Grafana : The Observability Friends
+- Linkerd : The Service Mesh Friend
 
 
 ## Terraform et plus généralement l'IaC (Maitriser le Déploiement de ressources Infra)
