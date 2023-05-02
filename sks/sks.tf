@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "lfs-bucketstates"
-    key = "terraform.tfstate"
+    key = "lfs-bucketstates"
     region = "ch-gva-2"
     endpoint = "sos-ch-gva-2.exo.io"
     skip_credentials_validation = true
