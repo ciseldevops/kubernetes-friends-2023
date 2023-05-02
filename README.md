@@ -204,9 +204,9 @@ Name : grafana
 Repo URL :  https://grafana.github.io/helm-charts/
 Chart : Grafana
 Version : 6.54.0
-```
-Add in the helm values
-```
+Namespace : monitoring
+
+VALUES :
 ingress:
   enabled: true
   ingressClassName: nginx
