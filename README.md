@@ -43,7 +43,7 @@ watch kubectl get nodes -A
 
 ## Deploy CSI Longhorn
 ```
-kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/1.4.1/deploy/longhorn.yaml
+kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.4.x/deploy/longhorn.yaml
 kubectl port-forward deployment/longhorn-ui 7000:8000 -n longhorn-system
 ```
 Access Longhorn dashboard at http://127.0.0.1:7000
