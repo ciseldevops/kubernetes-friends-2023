@@ -3,6 +3,7 @@ Fribourg Linux Seminar - Kubernetes Friends
 
 
 # Summary
+- Exoscale : The Hosting Friend
 - Terraform : The IaC Friend
 - Longhorn  : The Storage Friend 
 - ingress-nginx : The Ingress Friend
