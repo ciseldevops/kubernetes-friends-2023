@@ -127,7 +127,15 @@ Retrive default admin password
 ```
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
-
+Deploy Demo-App using ArgoCD
+```
+Name : demo-app
+Project : default
+Repository URL : https://github.com/ciseldevops/kubernetes-friends-2023.git
+Path : ./demo-app
+Namespace : demo-app
+Create namespace : True
+```
     
 ## Kasten to back up Applications and Cluster
 		a. Snapshot demo-app
