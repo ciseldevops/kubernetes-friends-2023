@@ -331,3 +331,8 @@ linkerd uninstall | kubectl delete -f -
 ```
 kubectl run -i --tty --rm debug --image=busybox --restart=Never -- sh
 ```
+
+## Destroy SKS Cluster
+```
+terraform destroy -auto-approve
+```
