@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "lfs-bucketstates"
+    bucket = "lfs-tfstates"
     key = "lfs-bucketstates"
     region = "ch-gva-2"
     endpoint = "sos-ch-gva-2.exo.io"
