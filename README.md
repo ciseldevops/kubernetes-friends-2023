@@ -238,6 +238,14 @@ Import Grafana Dashboard 315
 		b. Déploiement application de démo
 		c. automatically enables mutually-authenticated Transport Layer Security (mTLS) for all TCP traffic between meshed pods
 		d. Meshing demo service with annotations
+		
+Install linkerd locally
+```
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
+export PATH=$PATH:/home/XXXXX/.linkerd2/bin
+linkerd version
+```
+
 Validate cluster and install linkerd
 
 ```
