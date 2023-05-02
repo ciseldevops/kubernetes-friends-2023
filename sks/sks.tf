@@ -4,8 +4,8 @@ terraform {
     key = "lfs-bucketstates"
     region = "ch-gva-2"
     endpoint = "sos-ch-gva-2.exo.io"
-    skip_credentials_validation = true
-    skip_region_validation = true
+    #skip_credentials_validation = true
+    #skip_region_validation = true
   }
 }
 
