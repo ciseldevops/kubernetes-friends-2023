@@ -196,6 +196,7 @@ Prometheus deployment
 ```
 kubectl create ns monitoring
 kubectl -n monitoring apply -f obs/prometheus.yaml
+kubectl -n monitoring get all
 ```
 Create Grafana App in ArgoCD
 ```
