@@ -178,6 +178,15 @@ Access web interface at http://127.0.0.1:8080/k10/#/
 kubectl --namespace kasten-io port-forward service/gateway 8080:8000
 ```
 
+Take demo-app snapshot
+
+Delete demo-app deployment
+```
+kubectl -n demo-app delete deployments.apps demo-app
+```
+
+Restore demo-app using the snapshot
+
     
 ## Observability with Prometheus and Grafana (Controlling the use of resources)
 		a. Déploiement Prometheus via yaml repo
