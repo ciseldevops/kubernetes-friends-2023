@@ -195,7 +195,7 @@ Restore demo-app using the snapshot
 Prometheus deployment
 ```
 kubectl create ns monitoring
-kubectl -n monitoring apply -f kubernetes-friends-2023/obs/prometheus.yaml
+kubectl -n monitoring apply -f /obs/prometheus.yaml
 ```
 Create Grafana App in ArgoCD
 ```
