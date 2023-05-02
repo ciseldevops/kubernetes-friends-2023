@@ -38,6 +38,7 @@ terraform apply -auto-approve main.tfplan
 SKS Connection
 ```
 terraform output -json kubeconfig | jq -r . > ~/.kube/config
+watch kubectl get nodes -A
 ```
 
 ## Deploy CSI Longhorn
