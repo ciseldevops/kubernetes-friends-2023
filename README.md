@@ -13,11 +13,17 @@ Fribourg Linux Seminar - Kubernetes Friends
 
 
 ## Deploy SKS cluster on Kubernetes using terraform
-
-Access setup
+S3 Access setup
 ```
-export EXOSCALE_API_KEY=...
-export EXOSCALE_API_SECRET=...
+vi ~/.aws/credentials
+aws_access_key_id = ***
+aws_secret_access_key = ***
+```
+
+API Access setup
+```
+export EXOSCALE_API_KEY=***
+export EXOSCALE_API_SECRET=***
 ```
 
 SKS deployment
