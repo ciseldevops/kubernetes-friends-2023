@@ -219,13 +219,17 @@ adminUser: admin
 adminPassword: demo
 ```
 
-Some extra commands if necessary
+Patch ingress class and get the secrets
 ```
 kubectl -n monitoring patch ingress grafana -p '{"spec":{"ingressClassName":"nginx"}}'
 kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-user}" | base64 --decode ; echo
 ```
 
+Add Prometheus Data Source
+```
+URL : 
+```
 		
 ## Linkerd for securing communication between components (Mastering applications)
 		a. Installation linkerd et linkerd viz dashboard
@@ -313,3 +317,7 @@ linkerd uninstall | kubectl delete -f -
 ## Some Security Tools : [https://devops.cisel.ch ](https://devops.cisel.ch/kubernetes-containers-and-code-security-tools)
 ## Some Ops Tools  : [https://devops.cisel.ch  ](https://devops.cisel.ch/kubernetes-operational-tools-you-must-try)
 
+## Debug
+```
+kubectl run -i --tty --rm debug --image=busybox --restart=Never -- sh
+```
