@@ -113,8 +113,8 @@ EOF
 ```
 
 ## ArgoCD as a nerve center (Controlling the deployment of application resources)
-		a. Création Demo-App et Sync
-		b. Modification version nginx 1.23 -> 1.24 : Vue dans les logs des pods
+- Création Demo-App et Sync
+- Modification version nginx 1.23 -> 1.24 : Vue dans les logs des pods
 Install ArgoCD with service in LoadBalancer mode
 ```
 kubectl create namespace argocd
@@ -143,9 +143,9 @@ Create namespace : True
 ```
     
 ## Kasten to back up Applications and Cluster
-		a. Snapshot demo-app
-		b. Suppression déploiement demo-app
-		c. Restaure snapshot
+- Snapshot demo-app
+- Suppression déploiement demo-app
+- Restaure snapshot
 Exoscale create snapshot class
 ```
 kubectl -n kube-system apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-4.0/client/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml
@@ -189,9 +189,9 @@ Restore demo-app using the snapshot
 
     
 ## Observability with Prometheus and Grafana (Controlling the use of resources)
-		a. Déploiement Prometheus via yaml repo
-		b. Déploiement Grafana via Helm chart et custom values
-		c. Création de la data source et Import du Dashboard 315
+- Déploiement Prometheus via yaml repo
+- Déploiement Grafana via Helm chart et custom values
+- Création de la data source et Import du Dashboard 315
 Prometheus deployment
 ```
 kubectl create ns monitoring
@@ -234,10 +234,10 @@ URL : http://10.104.154.50:9090
 Import Grafana Dashboard 315
 		
 ## Linkerd for securing communication between components (Mastering applications)
-		a. Installation linkerd et linkerd viz dashboard
-		b. Déploiement application de démo
-		c. automatically enables mutually-authenticated Transport Layer Security (mTLS) for all TCP traffic between meshed pods
-		d. Meshing demo service with annotations
+- Installation linkerd et linkerd viz dashboard
+- Déploiement application de démo
+- Automatically enables mutually-authenticated Transport Layer Security (mTLS) for all TCP traffic between meshed pods
+- Meshing demo service with annotations
 		
 Install linkerd locally
 ```
