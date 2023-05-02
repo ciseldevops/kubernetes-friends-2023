@@ -228,8 +228,10 @@ kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-user
 
 Add Prometheus Data Source
 ```
-URL : 
+kubectl -n monitoring describe service prometheus
+URL : http://10.104.154.50:9090
 ```
+Import Grafana Dashboard 315
 		
 ## Linkerd for securing communication between components (Mastering applications)
 		a. Installation linkerd et linkerd viz dashboard
