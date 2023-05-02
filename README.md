@@ -260,7 +260,7 @@ Metrics and Dashboard
 ```
 kubectl apply -f linkerd/viz-install.yaml
 linkerd check
-
+linkerd viz dashboard &
 ```
 Create ingress
 ```
