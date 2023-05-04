@@ -16,7 +16,7 @@ module "sks" {
 
   name = "flsdemo"
   zone = "ch-gva-2"
-  kubernetes_version = "1.24.12"
+  kubernetes_version = "1.24.13"
 
   nodepools = {
     "compute" = {
