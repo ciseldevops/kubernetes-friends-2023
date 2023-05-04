@@ -17,6 +17,7 @@ Fribourg Linux Seminar - Kubernetes Friends
 S3 Access setup
 ```
 vi ~/.aws/credentials
+[default]
 aws_access_key_id = ***
 aws_secret_access_key = ***
 ```
