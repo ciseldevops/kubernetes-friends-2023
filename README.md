@@ -34,7 +34,6 @@ cd sks
 terraform init
 terraform plan -out main.tfplan
 terraform apply -auto-approve main.tfplan
-cd ..
 ```
 
 SKS Connection
