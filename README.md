@@ -117,8 +117,8 @@ EOF
 ```
 
 ## ArgoCD as a nerve center (Controlling the deployment of application resources)
-- Création Demo-App et Sync
-- Modification version nginx 1.23 -> 1.24 : Vue dans les logs des pods
+- Create Demo-App and Sync
+- Change version nginx 1.23 -> 1.24 : Check pods logs
 Install ArgoCD with service in LoadBalancer mode
 ```
 kubectl create namespace argocd
@@ -148,8 +148,8 @@ Create namespace : True
     
 ## Kasten to back up Applications and Cluster
 - Snapshot demo-app
-- Suppression déploiement demo-app
-- Restaure snapshot
+- Delete Deployment demo-app
+- Restore snapshot
 Exoscale create snapshot class
 ```
 kubectl -n kube-system apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-4.0/client/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml
@@ -193,9 +193,9 @@ Restore demo-app using the snapshot
 
     
 ## Observability with Prometheus and Grafana (Controlling the use of resources)
-- Déploiement Prometheus via yaml repo
-- Déploiement Grafana via Helm chart et custom values
-- Création de la data source et Import du Dashboard 315
+- Deploy Prometheus via yaml repo
+- Deploy Grafana via Helm chart et custom values
+- Create data source and Import  Dashboard 315
 Prometheus deployment
 ```
 kubectl create ns monitoring
@@ -238,8 +238,8 @@ URL : http://10.104.154.50:9090
 Import Grafana Dashboard 315
 		
 ## Linkerd for securing communication between components (Mastering applications)
-- Installation linkerd et linkerd viz dashboard
-- Déploiement application de démo
+- Install linkerd and linkerd viz dashboard
+- Deploy demo application
 - Automatically enables mutually-authenticated Transport Layer Security (mTLS) for all TCP traffic between meshed pods
 - Meshing demo service with annotations
 		
