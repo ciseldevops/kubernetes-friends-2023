@@ -161,12 +161,12 @@ kubectl -n kube-system apply -f https://raw.githubusercontent.com/ciseldevops/ku
 
 Validate CSI setup
 ```
+helm repo add kasten https://charts.kasten.io --force-update && helm repo update
 curl -s https://docs.kasten.io/tools/k10_primer.sh | bash
 ```
 
 Install Kasten using Helm
 ```
-helm repo add kasten https://charts.kasten.io --force-update && helm repo update
 kubectl create ns kasten-io
 helm install k10 kasten/k10 --namespace=kasten-io --set auth.tokenAuth.enabled=true
 kubectl -n kasten-io get pods -w
