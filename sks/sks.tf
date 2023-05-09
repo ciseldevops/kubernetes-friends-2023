@@ -20,7 +20,7 @@ module "sks" {
 
   nodepools = {
     "compute" = {
-      instance_type = "standard.medium"
+      instance_type = "standard.extra-large"
       size          = 3
     },
   }
