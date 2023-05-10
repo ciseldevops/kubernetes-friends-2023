@@ -204,10 +204,11 @@ Compare with an older image, like nginx:1.19
 trivy image --severity CRITICAL nginx:1.19
 ```
 
-GitLeaks
-
-Kasten admin Token : ékjskdjaSDJPJKLéDJN43NL43BTO54TB54KHGBK54HBGKHJ56B3HJKB
-
+## GitLeaks
+Check if there are secrets in your codes using entropy
+```
+gitleaks detect -v --no-git
+```
 
 
 
