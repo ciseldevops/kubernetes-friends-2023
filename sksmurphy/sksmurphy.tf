@@ -19,7 +19,7 @@ module "sks" {
   kubernetes_version = "1.24.13"
 
   nodepools = {
-    "compute-murphy" = {
+    "murphy" = {
       instance_type = "standard.extra-large"
       size          = 3
     },
