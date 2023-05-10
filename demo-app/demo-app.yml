@@ -19,6 +19,20 @@ spec:
           #image: nginx:1.24
           ports:
             - containerPort: 80
+          volumeMounts:
+        - name: html-volume
+          mountPath: /usr/share/nginx/html
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+      volumes:
+      - name: html-volume
+        configMap:
+          name: my-app-html
 ---
 apiVersion: v1
 kind: Service
@@ -51,3 +65,107 @@ spec:
                 name: demo-service
                 port:
                   name: http
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-app-html
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en">
+    
+    <head>
+      <meta charset="UTF-8">
+      <title>Devops bootcamp</title>
+      <style>
+        body {
+          background-color: #F5F5F5;
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+        }
+    
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 40px;
+          box-sizing: border-box;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+    
+        h1 {
+          text-align: center;
+          color: #444444;
+          font-size: 42px;
+          margin-bottom: 20px;
+        }
+    
+        p {
+          text-align: justify;
+          color: #666666;
+          font-size: 20px;
+          line-height: 30px;
+          max-width: 800px;
+        }
+    
+        .logo {
+          width: 200px;
+          margin-bottom: 40px;
+        }
+    
+        .animated {
+          animation-duration: 2s;
+          animation-fill-mode: forwards;
+          animation-iteration-count: infinite;
+          animation-timing-function: ease-in-out;
+        }
+    
+        .rotate {
+          animation-name: rotate;
+        }
+    
+        .bounce {
+          animation-name: bounce;
+        }
+    
+        @keyframes rotate {
+          0% {
+            transform: rotate(0deg);
+          }
+    
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+    
+        @keyframes bounce {
+          0% {
+            transform: translateY(0);
+          }
+    
+          50% {
+            transform: translateY(-10px);
+          }
+    
+          100% {
+            transform: translateY(0);
+          }
+        }
+      </style>
+    </head>
+    
+    <body>
+      <div class="container">
+        <img class="logo animated rotate" src="https://www.cisel.ch/wp-content/uploads/2021/07/7.png" alt="Cisel Logo">
+        <h1>Bootcamp devops</h1>
+        <p>Kubernetes is an open-source container orchestration platform that automates many of the manual processes involved in deploying, scaling, and managing containerized applications. It was originally developed by Google and is now maintained by the Cloud Native Computing Foundation (CNCF).</p>
+        <p>With Kubernetes, developers can easily deploy and manage their applications, ensuring that they are highly available, scalable, and fault-tolerant. Kubernetes provides a powerful set of features for deploying and managing containers, including automatic load balancing, self-healing, and horizontal scaling. It also provides a rich set of APIs for interacting with the platform and integrating it with other tools and services.</p>
+        <img class="logo animated bounce" src="https://www.cisel.ch/wp-content/uploads/2021/07/7.png" alt="Cisel Logo">
+      </div>
+    </body>
+    
+    </html>
+---
