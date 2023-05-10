@@ -204,6 +204,9 @@ Compare with an older image, like nginx:1.19
 trivy image --severity CRITICAL nginx:1.19
 ```
 
+GitLeaks
+
+admin password : 123456789!!!!
 
 
 
