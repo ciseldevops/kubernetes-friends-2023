@@ -179,6 +179,12 @@ Add Prometheus Data Source
 kubectl -n monitoring describe service prometheus
 URL : http://10.104.154.50:9090
 ```
+Access Prometheus using port-forward http://127.0.0.1:9090
+```
+kubectl --namespace monitoring port-forward service/prometheus 9090:9090
+container_network_receive_bytes_total
+```
+
 Import Grafana Dashboard 315
 		
 ## Linkerd for securing communication between components (Mastering applications)
