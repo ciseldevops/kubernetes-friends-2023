@@ -5,12 +5,13 @@ Fribourg Linux Seminar - Kubernetes Friends
 # Summary
 - Exoscale : The Hosting Friend
 - Terraform : The IaC Friend
-- Longhorn  : The Storage Friend 
-- ingress-nginx : The Ingress Friend
 - ArgoCD : The Deployment Friend
+- ingress-nginx : The Ingress Friend
 - Kasten : The Backup and DR Friend
 - Prometheus and Grafana : The Observability Friends
-- Linkerd : The Service Mesh Friend
+_- Linkerd : The Service Mesh Friend_
+_- Longhorn  : The Storage Friend _
+
 
 
 ## Deploy SKS cluster on Kubernetes using terraform
@@ -67,11 +68,6 @@ kubectl -n argocd get svc -w
 Retrive default admin password
 ```
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
-```
-Delete old demo-app
-```
-kubectl -n default delete deployments.apps demo-app
-kubectl -n default delete ingress demo-ingress
 ```
 Deploy Demo-App using ArgoCD
 ```
