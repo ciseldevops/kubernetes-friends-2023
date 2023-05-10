@@ -205,10 +205,24 @@ trivy image --severity CRITICAL nginx:1.19
 ```
 
 ## GitLeaks
+
 Check if there are secrets in your codes using entropy
 ```
 gitleaks detect -v --no-git
 ```
+## Terrascan
+
+Scan your Kubernetes deployment codes against Best Practice
+```
+terrascan scan -i k8s --iac-dir kubernetes-friends-2023/
+terrascan scan -i k8s --iac-file kubernetes-friends-2023/demo-app/demo-app.yaml
+```
+Scan your terraform codes agains Best Practice 
+```
+terrascan scan -i terraform --iac-file kubernetes-friends-2023/sksfls.tf
+```
+
+
 
 
 
