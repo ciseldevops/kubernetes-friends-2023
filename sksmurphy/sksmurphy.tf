@@ -15,7 +15,7 @@ module "sks" {
   version = "0.4.1"
 
   name = "murphy"
-  zone = "ch-dk-2"
+  zone = "ch-gva-2"
   kubernetes_version = "1.24.13"
 
   nodepools = {
