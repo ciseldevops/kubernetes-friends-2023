@@ -14,7 +14,7 @@ module "sks" {
   source  = "camptocamp/sks/exoscale"
   version = "0.4.1"
 
-  name = "flsdemo"
+  name = "sksfls1"
   zone = "ch-gva-2"
   kubernetes_version = "1.24.13"
 
