@@ -222,6 +222,13 @@ Scan your terraform codes agains Best Practice
 terrascan scan -i terraform --iac-file kubernetes-friends-2023/sksfls.tf
 ```
 
+## Kubescape (Or kube-bench)
+
+Scan your Kubernetes CLuster against CIS Benchmark
+```
+kubescape scan framework cis-v1.23-t1.0.1 --enable-host-scan
+kubescape scan framework cis-v1.23-t1.0.1 --enable-host-scan --verbose
+```
 
 
 
