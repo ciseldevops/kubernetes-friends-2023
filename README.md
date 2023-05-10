@@ -206,7 +206,7 @@ trivy image --severity CRITICAL nginx:1.19
 
 GitLeaks
 
-admin password : 123456789!!!!
+Kasten admin Token : ékjskdjaSDJPJKLéDJN43NL43BTO54TB54KHGBK54HBGKHJ56B3HJKB
 
 
 
