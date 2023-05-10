@@ -186,7 +186,29 @@ container_network_receive_bytes_total
 ```
 
 Import Grafana Dashboard 315
-		
+
+## Trivy
+
+Get all the containers images from all the namespaces
+```
+kubectl get pods --all-namespaces -o jsonpath="{.items[*].spec.containers[*].image}" | tr -s '[[:space:]]' '\n' | sort | uniq
+```
+
+Scan image for known CVE
+```
+trivy image nginx:1.23
+trivy image --severity CRITICAL nginx:1.23
+```
+Compare with an older image, like nginx:1.19
+```
+trivy image --severity CRITICAL nginx:1.19
+```
+
+
+
+
+
+
 ## Linkerd for securing communication between components (Mastering applications)
 - Install linkerd and linkerd viz dashboard
 - Deploy demo application
