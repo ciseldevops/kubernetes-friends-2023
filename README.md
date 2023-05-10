@@ -52,69 +52,6 @@ Access Longhorn dashboard at http://127.0.0.1:7000
 kubectl -n longhorn-system port-forward deployment/longhorn-ui 7000:8000 
 ```
 
-## Ingress controler
-Exoscale SKS : Install ingress-nginx in the namespace ingress-nginx  
-```
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/exoscale/deploy.yaml
-kubectl -n ingress-nginx get svc -w
-```
-Here is an example of a YAML file to deploy a demo application accessible via an Ingress Nginx :
-```
-cat <<EOF | kubectl apply -f -
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: demo-app
-spec:
-  selector:
-    matchLabels:
-      app: demo-app
-  replicas: 3
-  template:
-    metadata:
-      labels:
-        app: demo-app
-    spec:
-      containers:
-        - name: nginx
-          image: nginx:latest
-          ports:
-            - containerPort: 80
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: demo-service
-spec:
-  selector:
-    app: demo-app
-  ports:
-    - name: http
-      port: 80
-      targetPort: 80
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: demo-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  ingressClassName: nginx
-  rules:
-    - host: demo.example.com
-      http:
-        paths:
-          - pathType: Prefix
-            path: /
-            backend:
-              service:
-                name: demo-service
-                port:
-                  name: http
-EOF
-```
 
 ## ArgoCD as a nerve center (Controlling the deployment of application resources)
 - Create Demo-App and Sync
@@ -144,6 +81,17 @@ Repository URL : https://github.com/ciseldevops/kubernetes-friends-2023.git
 Path : ./demo-app
 Namespace : demo-app
 Create namespace : True
+```
+
+## Ingress controler
+Exoscale SKS : Install ingress-nginx in the namespace ingress-nginx  
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/exoscale/deploy.yaml
+kubectl -n ingress-nginx get svc -w
+```
+Here is an example of a YAML file to deploy a demo application accessible via an Ingress Nginx :
+```
+kubectl apply -f https://raw.githubusercontent.com/ciseldevops/kubernetes-friends-2023/main/demo-app/demo-app.yml
 ```
     
 ## Kasten to back up Applications and Cluster
