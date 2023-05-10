@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "lfs-tfstates"
+    bucket = "lfs-murphy-tfstates"
     key = "lfs-bucketstates"
     region = "ch-gva-2"
     endpoint = "sos-ch-gva-2.exo.io"
@@ -19,7 +19,7 @@ module "sks" {
   kubernetes_version = "1.24.13"
 
   nodepools = {
-    "compute" = {
+    "compute-murphy" = {
       instance_type = "standard.extra-large"
       size          = 3
     },
