@@ -6,9 +6,10 @@ Fribourg Linux Seminar - Kubernetes Friends
 - Exoscale : The Hosting Friend
 - Terraform : The IaC Friend
 - ArgoCD : The Deployment Friend
-- ingress-nginx : The Ingress Friend
 - Kasten : The Backup and DR Friend
 - Prometheus and Grafana : The Observability Friends
+- Trivy & Kubescape & GitLeaks : Security
+- _ingress-nginx : The Ingress Friend_
 - _Linkerd : The Service Mesh Friend_
 - _Longhorn  : The Storage Friend_
 
