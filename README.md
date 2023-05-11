@@ -55,9 +55,8 @@ kubectl -n longhorn-system port-forward deployment/longhorn-ui 7000:8000
 ```
 
 
-## ArgoCD as a nerve center (Controlling the deployment of application resources)
-- Create Demo-App and Sync
-- Change version nginx 1.23 -> 1.24 : Check pods logs
+## Deploy ArgoCD on the cluster
+
 Install ArgoCD with service in LoadBalancer mode
 ```
 kubectl create namespace argocd
@@ -92,9 +91,7 @@ kubectl apply -f https://raw.githubusercontent.com/ciseldevops/kubernetes-friend
 ```
     
 ## Kasten to back up Applications and Cluster
-- Snapshot demo-app
-- Delete Deployment demo-app
-- Restore snapshot
+
 Exoscale create snapshot class
 ```
 kubectl -n kube-system apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-4.0/client/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml
@@ -137,10 +134,8 @@ kubectl -n demo-app delete deployments.apps demo-app
 Restore demo-app using the snapshot
 
     
-## Observability with Prometheus and Grafana (Controlling the use of resources)
-- Deploy Prometheus via yaml repo
-- Deploy Grafana via Helm chart et custom values
-- Create data source and Import  Dashboard 315
+## Observability with Prometheus and Grafana
+
 Prometheus deployment
 ```
 kubectl create ns monitoring
@@ -235,11 +230,7 @@ kubescape scan framework cis-v1.23-t1.0.1 --enable-host-scan --verbose
 
 
 
-## Linkerd for securing communication between components (Mastering applications)
-- Install linkerd and linkerd viz dashboard
-- Deploy demo application
-- Automatically enables mutually-authenticated Transport Layer Security (mTLS) for all TCP traffic between meshed pods
-- Meshing demo service with annotations
+## Linkerd for securing communication between components
 		
 Install linkerd locally
 ```
