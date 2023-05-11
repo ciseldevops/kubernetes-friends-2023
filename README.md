@@ -9,8 +9,8 @@ Fribourg Linux Seminar - Kubernetes Friends
 - ingress-nginx : The Ingress Friend
 - Kasten : The Backup and DR Friend
 - Prometheus and Grafana : The Observability Friends
-_- Linkerd : The Service Mesh Friend_
-_- Longhorn  : The Storage Friend _
+- _Linkerd : The Service Mesh Friend_
+- _Longhorn  : The Storage Friend_
 
 
 
