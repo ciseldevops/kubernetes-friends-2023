@@ -173,7 +173,7 @@ kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-user
 Add Prometheus Data Source
 ```
 kubectl -n monitoring describe service prometheus
-URL : http://10.104.154.50:9090
+URL : http://prometheus.internal.url:9090
 ```
 Access Prometheus using port-forward http://127.0.0.1:9090
 ```
