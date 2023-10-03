@@ -87,7 +87,7 @@ kubectl -n ingress-nginx get svc -w
 ```
 Here is an example of a YAML file to deploy a demo application accessible via an Ingress Nginx :
 ```
-kubectl apply -f https://raw.githubusercontent.com/ciseldevops/kubernetes-friends-2023/main/demo-app/demo-app.yml
+kubectl apply -f https://raw.githubusercontent.com/ciseldevops/kubernetes-friends-2023/main/demo-app/demo-app.yaml
 ```
     
 ## Kasten to back up Applications and Cluster
